@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import GoogleMapReact from "google-map-react";
-import { Button, Icon } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { incrementCounter, decrementCounter } from './TestActions';
+import { openModal } from '../modals/modalActions';
 import Script from 'react-load-script';
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -11,7 +11,7 @@ import PlacesAutocomplete, {
 
 
 
-const Marker = () => <Icon name='marker' size='big' color='red'/>
+
 
 class TestComponent extends Component {
   state = {
@@ -46,10 +46,10 @@ class TestComponent extends Component {
     const inputProps = { value: this.state.address, onChange: this.onChange };
     return (
       <div>
-        {/* <Script
+        <Script
           url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnDKcxsMboxTXh75wEaNL_0VTpIIe-UFM&libraries=places"
           onLoad={this.handleScriptLoad}
-        /> */}
+        />
         <h1>Test Area</h1>
         <h2>{this.props.data}</h2>
         <Button
@@ -62,6 +62,11 @@ class TestComponent extends Component {
           color="red"
           content="Dec"
         />
+        <Button
+          onClick={() => this.props.openModal('TestModal', {data: 43})}
+          color="teal"
+          content="Open"
+        />
         <br />
         <br />
         <br />
@@ -71,22 +76,6 @@ class TestComponent extends Component {
             <button type="submit">Submit</button>
           </form>
         )}
-
-        <div style={{ height: "300px", width: "100%" }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: "AIzaSyCnDKcxsMboxTXh75wEaNL_0VTpIIe-UFM"
-            }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
-          >
-            <Marker
-              lat={59.955413}
-              lng={30.337844}
-              text={"Kreyser Avrora"}
-            />
-          </GoogleMapReact>
-        </div>
       </div>
     );
   }
@@ -97,4 +86,4 @@ const mapStateToProps = state => ({
 });
  
 
-export default connect(mapStateToProps, { incrementCounter, decrementCounter })(TestComponent);
+export default connect(mapStateToProps, { incrementCounter, decrementCounter, openModal })(TestComponent);
