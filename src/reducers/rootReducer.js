@@ -4,6 +4,7 @@ import eventReducer from '../features/event/eventReducer';
 import testReducer from '../features/testarea/testReducer';
 import modalReducer from '../features/modals/modalReducer';
 import authReducer from '../features/auth/authReducer';
+import asyncReducer from './async/asyncReducer';
 
 
 
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   form: formReducer,
   events: eventReducer,
   modals: modalReducer,
-  auth: authReducer
+  auth: authReducer,
+  async: asyncReducer
 })
 
 export default rootReducer;

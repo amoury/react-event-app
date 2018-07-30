@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { incrementCounter, decrementCounter } from './TestActions';
-import { openModal } from '../modals/modalActions';
-import Script from 'react-load-script';
+import React, { Component } from "react";
+import { Button } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { incrementAsync, decrementAsync } from "./TestActions";
+import { openModal } from "../modals/modalActions";
+import Script from "react-load-script";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
-} from "react-places-autocomplete"; 
-
-
-
-
+} from "react-places-autocomplete";
 
 class TestComponent extends Component {
   state = {
@@ -53,17 +49,23 @@ class TestComponent extends Component {
         <h1>Test Area</h1>
         <h2>{this.props.data}</h2>
         <Button
-          onClick={this.props.incrementCounter}
+          loading={this.props.loading}
+          onClick={this.props.incrementAsync}
           color="green"
           content="Inc"
         />
         <Button
-          onClick={this.props.decrementCounter}
+          loading={this.props.loading}
+          onClick={this.props.decrementAsync}
           color="red"
           content="Dec"
         />
         <Button
-          onClick={() => this.props.openModal('TestModal', {data: 43})}
+          onClick={() =>
+            this.props.openModal("TestModal", {
+              data: 43
+            })
+          }
           color="teal"
           content="Open"
         />
@@ -82,8 +84,11 @@ class TestComponent extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.test.data
+  data: state.test.data,
+  loading: state.test.loading
 });
- 
 
-export default connect(mapStateToProps, { incrementCounter, decrementCounter, openModal })(TestComponent);
+export default connect(
+  mapStateToProps,
+  { incrementAsync, decrementAsync, openModal }
+)(TestComponent);

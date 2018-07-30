@@ -1,7 +1,8 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from './TestActions';
+import { INCREMENT_COUNTER, DECREMENT_COUNTER, COUNTER_ACTION_STARTED, COUNTER_ACTION_FINISHED } from './TestActions';
 
 const initialState = {
-  data: 42
+  data: 42,
+  loading: false
 }
 
 const testReducer = (state = initialState, action) => {
@@ -10,6 +11,10 @@ const testReducer = (state = initialState, action) => {
       return { ...state, data: state.data + 1 };
     case DECREMENT_COUNTER:
       return { ...state, data: state.data - 1 };
+    case COUNTER_ACTION_STARTED:
+      return { ...state, loading: true }
+    case COUNTER_ACTION_FINISHED: 
+      return { ...state, loading: false }
     default:
       return state;
   }
