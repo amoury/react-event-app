@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import EventList from '../eventList/EventList';
 import { deleteEvent } from '../eventActions';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
+import EventActivity from '../eventActivity/EventActivity';
 
 
 class EventDashboard extends Component {
@@ -20,7 +21,7 @@ class EventDashboard extends Component {
           <EventList onEventDelete={this.handleDeleteEvent} events={this.props.events} />
         </Grid.Column>
         <Grid.Column width={6}>
-          
+          <EventActivity />
         </Grid.Column>
       </Grid>;
   }
